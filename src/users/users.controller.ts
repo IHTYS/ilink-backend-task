@@ -28,7 +28,7 @@ export class UsersController {
   @ApiOperation({summary: `User create`})
   @ApiResponse({status: 200, type: User})
   @UsePipes(ValidationPipe)
-  @Post()
+  @Post('get/all')
   create(@Body() userDto: CreateUserDto) {
     return this.usersService.createUser(userDto);
   }
@@ -62,11 +62,11 @@ export class UsersController {
   @ApiOperation({summary: `Update user by id`})
   @Put(':id')
   async update(@Param('id') id: number, @Body() userDto: CreateUserDto): Promise<CreateUserDto> {
-    const { numberOfAffectedRows, updatedPost } = await this.usersService.update(id, userDto);
+    const { numberOfAffectedRows, updatedUser } = await this.usersService.update(id, userDto);
     if (numberOfAffectedRows === 0) {
       throw new NotFoundException('This User doesn\'t exist');
     }
-    return updatedPost;
+    return updatedUser;
   }
 
   @ApiOperation({summary: `Delete user by id`})

@@ -47,9 +47,9 @@ export class UsersService {
   }
 
   async update(id, data) {
-    const [numberOfAffectedRows, [updatedPost]] = await this.userRepository.update({ ...data }, { where: { id}, returning: true });
+    const [numberOfAffectedRows, [updatedUser]] = await this.userRepository.update({ ...data }, { where: { id}, returning: true });
 
-    return { numberOfAffectedRows, updatedPost };
+    return { numberOfAffectedRows, updatedUser };
   }
 
   async getAllUsers() {
