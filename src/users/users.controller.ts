@@ -35,7 +35,6 @@ export class UsersController {
 
   @ApiOperation({summary: `Get user by id`})
   @ApiResponse({status: 200, type: User})
-  @UsePipes(ValidationPipe)
   @Get('getById/:id')
   findOne(@Param('id') id: number) {
     return this.usersService.findOneById(id);
@@ -43,19 +42,21 @@ export class UsersController {
 
   @ApiOperation({ summary: `Get user by name` })
   @ApiResponse({ status: 200, type: User })
-  @UsePipes(ValidationPipe)
   @Get(`getByName/:name`)
   getUserByName(@Param('name') name: string) {
     return this.usersService.getUserByName(name);
   }
 
   @ApiOperation({summary: `Get all users`})
-  @Get()
+  @ApiResponse({status: 200, type: [User]})
+  @Get(`getAll`)
   async findAll() {
     return await this.usersService.findAll();
   }
 
   @ApiOperation({summary: `Update user by id`})
+  @ApiResponse({status: 200, type: User})
+  @UsePipes(ValidationPipe)
   @Put(':id')
   async update(@Param('id') id: number, @Body() userDto: CreateUserDto): Promise<CreateUserDto> {
     const { numberOfAffectedRows, updatedUser } = await this.usersService.update(id, userDto);
@@ -66,6 +67,8 @@ export class UsersController {
   }
 
   @ApiOperation({summary: `Delete user by id`})
+  @Roles(`ADMIN`)
+  @UseGuards(RolesGuard)
   @Delete(':id')
   async remove(@Param('id') id: number) {
     const deleted = await this.usersService.delete(id);
