@@ -28,16 +28,16 @@ export class UsersController {
   @ApiOperation({summary: `User create`})
   @ApiResponse({status: 200, type: User})
   @UsePipes(ValidationPipe)
-  @Post('get/all')
+  @Post(`create`)
   create(@Body() userDto: CreateUserDto) {
     return this.usersService.createUser(userDto);
   }
 
   @ApiOperation({summary: `Get user by id`})
-  @ApiResponse({status: 200, type: User})
+  @ApiResponse({status: 200, type: CreateUserDto})
   @UsePipes(ValidationPipe)
-  @Get(':id')
-  async findOne(@Param('id') id: number): Promise<User> {
+  @Get('getById/:id')
+  async findOne(@Param('id') id: number): Promise<CreateUserDto> {
     const user = await this.usersService.findOneById(id);
     if (!user) {
       throw new NotFoundException('This User doesn\'t exist');
@@ -46,9 +46,9 @@ export class UsersController {
   }
 
   @ApiOperation({summary: `Get user by name`})
-  @ApiResponse({status: 200, type: User})
+  @ApiResponse({status: 200, type: CreateUserDto})
   @UsePipes(ValidationPipe)
-  @Get(`get/:name`)
+  @Get(`getByName/:name`)
   getUserByName(@Param('name') name) {
     return this.usersService.getUserByName(name);
   }

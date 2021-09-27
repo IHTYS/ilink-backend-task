@@ -3,9 +3,9 @@ import { IsEmail, IsString, Length } from "class-validator";
 
 export class CreateUserDto {
 
-  @ApiProperty({example: `12345`, description: `Password`})
+  @ApiProperty({example: `Maxim`, description: `User name`})
   @IsString({message: `Must be string`})
-  @Length(4, 20, {message: `Password must be not less then 4 and not max then 20`})
+  @Length(1, 20, )
   readonly name: string;
 
   @ApiProperty({example: `user@mail.ru`, description: `Mail`})
@@ -18,13 +18,13 @@ export class CreateUserDto {
   @Length(4, 20, {message: `Password must be not less then 4 and not max then 20`})
   readonly password: string;
 
-  @ApiProperty({example: `12345`, description: `Password`})
-  @IsString({message: `Must be string`})
-  @Length(4, 20, {message: `Password must be not less then 4 and not max then 20`})
-  readonly createdAt: Date;
-
-  @ApiProperty({example: `12345`, description: `Password`})
-  @IsString({message: `Must be string`})
-  @Length(4, 20, {message: `Password must be not less then 4 and not max then 20`})
-  readonly deletedAt: Date;
+  // @ApiProperty({example: `12345`, description: `Password`})
+  // @IsString({message: `Must be string`})
+  // @Length(4, 20, {message: `Password must be not less then 4 and not max then 20`})
+  // readonly createdAt: Date;
+  //
+  // @ApiProperty({example: `12345`, description: `Password`})
+  // @IsString({message: `Must be string`})
+  // @Length(4, 20, {message: `Password must be not less then 4 and not max then 20`})
+  // readonly deletedAt: Date;
 }

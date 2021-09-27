@@ -20,11 +20,12 @@ export class UsersService {
     return user;
   }
 
-  async findOneById(id): Promise<User> {
-    return await this.userRepository.findOne({
-      where: { id },
-      include: [{ model: User, attributes: { exclude: ['password'] } }],
-    });
+  async findOneById(id): Promise<CreateUserDto> {
+    return await this.userRepository.findOne({ where: { id } });
+    // return await this.userRepository.findOne<User>({
+    //   where: { id },
+    //   include: [{ model: User, attributes: { exclude: ['password'] } }],
+    // });
   }
 
   async getUserByName(name: string) {

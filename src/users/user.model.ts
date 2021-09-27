@@ -15,11 +15,12 @@ import { UserRoles } from "../roles/user-roles.model";
 import { Post } from "../posts/post.model";
 
 interface  UserCreationAttrs {
+  name: string;
   email: string;
   password: string;
-  name: string;
-  createdAt: Date;
-  deletedAt: Date;
+
+  // createdAt: Date;
+  // deletedAt: Date;
 }
 
 @Table({tableName: `users`})
@@ -41,13 +42,13 @@ export class User extends  Model<User, UserCreationAttrs> {
   @Column({type: DataType.STRING, allowNull: false})
   password: string;
 
-  @CreatedAt
-  @Column
-  createdAt: Date;
-
-  @DeletedAt
-  @Column
-  deletedAt: Date;
+  // @CreatedAt
+  // @Column
+  // createdAt: Date;
+  //
+  // @DeletedAt
+  // @Column
+  // deletedAt: Date;
 
   @ApiProperty({example: `true`, description: `User banned or not`})
   @Column({type: DataType.BOOLEAN, defaultValue: false})
