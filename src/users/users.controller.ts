@@ -34,19 +34,15 @@ export class UsersController {
   }
 
   @ApiOperation({summary: `Get user by id`})
-  @ApiResponse({status: 200, type: CreateUserDto})
+  @ApiResponse({status: 200, type: User})
   @UsePipes(ValidationPipe)
   @Get('getById/:id')
-  async findOne(@Param('id') id: number): Promise<CreateUserDto> {
-    const user = await this.usersService.findOneById(id);
-    if (!user) {
-      throw new NotFoundException('This User doesn\'t exist');
-    }
-    return user;
+  findOne(@Param('id') id: number) {
+    return this.usersService.findOneById(id);
   }
 
-  @ApiOperation({summary: `Get user by name`})
-  @ApiResponse({status: 200, type: CreateUserDto})
+  @ApiOperation({ summary: `Get user by name` })
+  @ApiResponse({ status: 200, type: User })
   @UsePipes(ValidationPipe)
   @Get(`getByName/:name`)
   getUserByName(@Param('name') name) {

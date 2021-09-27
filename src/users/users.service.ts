@@ -20,17 +20,14 @@ export class UsersService {
     return user;
   }
 
-  async findOneById(id): Promise<CreateUserDto> {
-    return await this.userRepository.findOne({ where: { id } });
-    // return await this.userRepository.findOne<User>({
-    //   where: { id },
-    //   include: [{ model: User, attributes: { exclude: ['password'] } }],
-    // });
+  async findOneById(id): Promise<User> {
+    const user = await this.userRepository.findOne({where: {id}});
+    return user;
   }
 
-  async getUserByName(name: string) {
-    const users =await this.userRepository.findOne({where: {name}, include: {all: true}});
-    return users;
+  async getUserByName(name: string): Promise<User>{
+    const user = await this.userRepository.findOne({where: {name}});
+    return user;
   }
 
   async getUserByEmail(email: string): Promise<User> {
@@ -38,9 +35,12 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.findAll<User>({
-      include: [{ model: User, attributes: { exclude: ['password'] } }],
-    });
+    const users = await this.userRepository.findAll({include: {all: true}});
+    return users;
+    // users = await this.userRepository.findAll({
+    //   include: [{ model: User, attributes: { exclude: ['password'] } }],
+    // });
+    // return users;
   }
 
   async delete(id) {
