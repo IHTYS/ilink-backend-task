@@ -21,12 +21,12 @@ export class UsersService {
   }
 
   async findOneById(id): Promise<User> {
-    const user = await this.userRepository.findOne({where: {id}});
+    const user = await this.userRepository.findOne({where: {id}, attributes: { exclude: ['password'] }});
     return user;
   }
 
   async getUserByName(name: string): Promise<User>{
-    const user = await this.userRepository.findOne({where: {name}});
+    const user = await this.userRepository.findOne({where: {name}, attributes: { exclude: ['password'] }});
     return user;
   }
 
@@ -36,7 +36,7 @@ export class UsersService {
 
   async findAll(): Promise<User[]> {
 
-    const users = await this.userRepository.findAll();
+    const users = await this.userRepository.findAll({attributes: { exclude: ['password'] }});
     return users;
   }
 
