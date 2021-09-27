@@ -18,9 +18,6 @@ interface  UserCreationAttrs {
   name: string;
   email: string;
   password: string;
-
-  // createdAt: Date;
-  // deletedAt: Date;
 }
 
 @Table({tableName: `users`})
@@ -41,14 +38,6 @@ export class User extends  Model<User, UserCreationAttrs> {
   @ApiProperty({example: `12345`, description: `User password`})
   @Column({type: DataType.STRING, allowNull: false})
   password: string;
-
-  // @CreatedAt
-  // @Column
-  // createdAt: Date;
-  //
-  // @DeletedAt
-  // @Column
-  // deletedAt: Date;
 
   @ApiProperty({example: `true`, description: `User banned or not`})
   @Column({type: DataType.BOOLEAN, defaultValue: false})

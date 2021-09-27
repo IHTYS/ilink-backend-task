@@ -45,7 +45,7 @@ export class UsersController {
   @ApiResponse({ status: 200, type: User })
   @UsePipes(ValidationPipe)
   @Get(`getByName/:name`)
-  getUserByName(@Param('name') name) {
+  getUserByName(@Param('name') name: string) {
     return this.usersService.getUserByName(name);
   }
 

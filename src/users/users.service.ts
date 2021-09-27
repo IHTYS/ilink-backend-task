@@ -37,10 +37,6 @@ export class UsersService {
   async findAll(): Promise<User[]> {
     const users = await this.userRepository.findAll({include: {all: true}});
     return users;
-    // users = await this.userRepository.findAll({
-    //   include: [{ model: User, attributes: { exclude: ['password'] } }],
-    // });
-    // return users;
   }
 
   async delete(id) {
